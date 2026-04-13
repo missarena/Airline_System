@@ -1,6 +1,7 @@
 package com.example.location_service.model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Getter
@@ -10,4 +11,28 @@ import lombok.*;
 @Builder
 @Entity
 public class City {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @Column(nullable=false)
+    private String name;
+
+    @Column(nullable = false,unique=true)
+    private String cityCode;
+
+    @Column(nullable = false)
+    private String countryCode;
+
+    @Column(nullable = false)
+    private String countryName;
+
+    @Size(max=10)
+    private String regionCode;
+
+    @Column(name="time_zone_id",length=50)
+    private String timeZoneId;
+
+
 }
