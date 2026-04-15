@@ -14,9 +14,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class cityServiceImpl implements CityService {
+public class CityServiceImpl implements CityService {
 
-    CityRepository cityRepository;
+     private final CityRepository cityRepository;
 
     @Override
     public cityResponse createCity(cityRequest request) {
@@ -79,7 +79,7 @@ public class cityServiceImpl implements CityService {
 
     @Override
     public boolean cityExists(String cityCode) {
-        return false;
+        return cityRepository.existsByCityCode(cityCode);
     }
 
    @Override

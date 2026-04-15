@@ -46,9 +46,9 @@ public class AirportMapper {
             existingAirport.setName(request.getName());
         }
 
-        if(request.getTimeZone()!=null){
-            existingAirport.setTimeZone(request.getTimeZone());
-        }
+//        if(request.getTimeZone()!=null){
+//            existingAirport.setTimeZone(request.getTimeZone());
+//        }
 
         if(request.getAddress()!=null){
             existingAirport.setAddress(request.getAddress());

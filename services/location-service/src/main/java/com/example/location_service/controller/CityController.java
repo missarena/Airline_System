@@ -36,15 +36,17 @@ public class CityController {
 
     @GetMapping
     public ResponseEntity<Page<cityResponse>> getAllCities(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size,
-            @RequestParam(defaultValue = "name") String sortBy,
-            @RequestParam(defaultValue = "asc") String sortDirection
-    ){
-        Sort sort=Sort.by(Sort.Direction.fromString(sortDirection),sortBy);
-        Pageable pageable= PageRequest.of(page,size,sort);
-        return ResponseEntity.ok(cityService.getAllCities(pageable));
 
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "20") int size,
+            @RequestParam(name = "sortBy", defaultValue = "name") String sortBy,
+            @RequestParam(name = "sortDirection", defaultValue = "asc") String sortDirection
+
+    ) {
+        Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), sortBy);
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        return ResponseEntity.ok(cityService.getAllCities(pageable));
     }
 
     @PutMapping("/{id}")
@@ -60,16 +62,15 @@ public class CityController {
 
     @GetMapping("/search")
     public ResponseEntity<Page<cityResponse>> searchCities(
-            @RequestParam String keyword,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size
-    ){
-       // Sort sort=Sort.by(Sort.Direction.fromString(sortDirection),sortBy);
-        Pageable pageable= PageRequest.of(page,size);
-        return ResponseEntity.ok(cityService.searchCities(keyword,pageable));
 
+            @RequestParam(name = "keyword") String keyword,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size
+
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(cityService.searchCities(keyword, pageable));
     }
-
     @GetMapping("/country/countryCode")
     public ResponseEntity<Page<cityResponse>> getCitiesByCountryCode(
             @RequestParam String countryCode,
@@ -83,7 +84,9 @@ public class CityController {
     }
 
     @GetMapping("/exists/{cityCode}")
-    public ResponseEntity<Boolean> checkCityExists(@PathVariable String cityCode){
+    public ResponseEntity<Boolean> checkCityExists(
+            @PathVariable("cityCode") String cityCode
+    ) {
         return ResponseEntity.ok(cityService.cityExists(cityCode.toUpperCase()));
     }
 
