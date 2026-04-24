@@ -29,9 +29,9 @@ public class CityController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<cityResponse> getCityById(@PathVariable Long id){
-        cityResponse res=cityService.getCityById(id);
-        return ResponseEntity.status(HttpStatus.CREATED).body(res);
+    public ResponseEntity<cityResponse> getCityById(@PathVariable("id") Long id){
+        cityResponse res = cityService.getCityById(id);
+        return ResponseEntity.ok(res);
     }
 
     @GetMapping
@@ -50,12 +50,12 @@ public class CityController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<cityResponse> updateCity(@PathVariable Long id,@Valid @RequestBody cityRequest request){
+    public ResponseEntity<cityResponse> updateCity(@PathVariable("id") Long id,@Valid @RequestBody cityRequest request){
         return ResponseEntity.ok(cityService.updateCity(id,request));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse> deleteCity(@PathVariable Long id){
+    public ResponseEntity<ApiResponse> deleteCity(@PathVariable("id") Long id){
         cityService.deleteCity(id);
         return ResponseEntity.ok(new ApiResponse("City deleted successfully"));
     }
